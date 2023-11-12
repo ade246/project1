@@ -57,3 +57,17 @@ def test_product_selection_with_sufficient_funds():
     vending.event = 'suprise'
     vending.update()
     assert vending.state.name == 'deliver_product'
+
+def test_return_change():
+    vending = VendingMachine()
+    vending.add_state(WaitingState())
+    vending.add_state(AddCoinsState())
+    vending.add_state(DeliverProductState())
+    vending.add_state(CountChangeState())
+    vending.go_to_state('waiting')
+    vending.event = '5'
+    vending.update()
+    vending.event = 'RETURN'
+    vending.update()
+    assert vending.state.name == 'count_change'
+    assert vending.change_due == 5
