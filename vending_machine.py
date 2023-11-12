@@ -36,8 +36,18 @@ class StateMachine:
     def __init__(self):
         self.coins = 0
 
-def display_money(self, money):
+    def display_money(self, money):
         if money >= 100:
             return f'{money / 100}$'
         else:
             return f'{money}¢'
+
+    def return_money(self):
+        if self.coins > 0:
+            change = self.display_money(self.coins)
+            print(f"Change returned: {change}")
+        print("Thank you, come again.")
+        self.coins = 0
+        return True  # Indicate that the window should close
+    
+    
