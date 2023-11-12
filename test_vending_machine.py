@@ -71,3 +71,12 @@ def test_return_change():
     vending.update()
     assert vending.state.name == 'count_change'
     assert vending.change_due == 5
+
+
+if __name__ == '__main__':
+    test_initial_state()
+    test_add_coin()
+    test_product_selection_with_insufficient_funds()
+    test_product_selection_with_sufficient_funds()
+    test_return_change()
+    print("All tests passed!")
