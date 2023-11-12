@@ -21,3 +21,15 @@ def test_initial_state():
     vending.add_state(CountChangeState())
     vending.go_to_state('waiting')
     assert vending.state.name == 'waiting'
+
+def test_add_coin():
+    vending = VendingMachine()
+    vending.add_state(WaitingState())
+    vending.add_state(AddCoinsState())
+    vending.add_state(DeliverProductState())
+    vending.add_state(CountChangeState())
+    vending.go_to_state('waiting')
+    vending.event = '5'
+    vending.update()
+    assert vending.amount == 5
+    assert vending.state.name == 'add_coins'
