@@ -35,3 +35,9 @@ COIN_VALUES = {"Nickel": 5, "Dime": 10, "Quarter": 25, "Loonie": 100, "Toonie": 
 class StateMachine:
     def __init__(self):
         self.coins = 0
+
+def display_money(self, money):
+        if money >= 100:
+            return f'{money / 100}$'
+        else:
+            return f'{money}¢'
