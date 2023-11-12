@@ -33,3 +33,14 @@ def test_add_coin():
     vending.update()
     assert vending.amount == 5
     assert vending.state.name == 'add_coins'
+
+def test_product_selection_with_insufficient_funds():
+    vending = VendingMachine()
+    vending.add_state(WaitingState())
+    vending.add_state(AddCoinsState())
+    vending.add_state(DeliverProductState())
+    vending.add_state(CountChangeState())
+    vending.go_to_state('waiting')
+    vending.event = 'suprise'
+    vending.update()
+    assert vending.state.name == 'waiting'
