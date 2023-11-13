@@ -64,5 +64,13 @@ class StateMachine:
             else:
                 needed = cost - self.coins
                 print(f"Not enough money for {product_name}. Need {self.display_money(needed)} more.")
+
+    def process_event(self, event):
+        if event in COIN_VALUES:
+            self.add_coin(COIN_VALUES[event])
+        elif event in [key for _, key in SELECTION_LIST]:
+            self.select_product(event)
+        elif event == "RETURN":
+            return self.return_money()
     
     
