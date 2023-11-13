@@ -53,5 +53,16 @@ class StateMachine:
     def add_coin(self, coin_value):
         self.coins += coin_value
         print(f"Total inserted: {self.display_money(self.coins)}")
+
+    def select_product(self, product_key):
+        product_name = next((name for name, key in SELECTION_LIST if key == product_key), None)
+        if product_name:
+            cost = ITEM_COSTS[product_name]
+            if self.coins >= cost:
+                self.coins -= cost
+                print(f"Dispensed {product_name}. Remaining balance: {self.display_money(self.coins)}")
+            else:
+                needed = cost - self.coins
+                print(f"Not enough money for {product_name}. Need {self.display_money(needed)} more.")
     
     
