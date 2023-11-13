@@ -49,5 +49,9 @@ class StateMachine:
         print("Thank you, come again.")
         self.coins = 0
         return True  # Indicate that the window should close
+
+    def add_coin(self, coin_value):
+        self.coins += coin_value
+        print(f"Total inserted: {self.display_money(self.coins)}")
     
     
