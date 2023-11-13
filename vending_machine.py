@@ -72,5 +72,39 @@ class StateMachine:
             self.select_product(event)
         elif event == "RETURN":
             return self.return_money()
+
+if __name__ == "__main__":
+    machine = StateMachine()
+
+    # Define the coins column
+    coin_col = [[sg.Text("ENTER COINS")]] + [[sg.Button(item[0], key=item[1], size=(10, 1))] for item in COIN_LIST]
+
+    # Define the selections and costs in the same row with double space
+    selection_and_cost_col = [[sg.Text("SELECT ITEM", size=(15, 1)), sg.Text("PRICE", size=(7, 1))]]
+    selection_and_cost_col += [
+        [sg.Button(name, key=key, size=(15, 1)), sg.Text(f'{ITEM_COSTS[name]}¢', size=(7, 1))]
+        for name, key in SELECTION_LIST
+    ]
+
+    # Define the layout with the selections and costs aligned
+    layout = [
+        [sg.Column(coin_col, vertical_alignment="TOP"),
+         sg.VSeparator(),
+         sg.Column(selection_and_cost_col, vertical_alignment="TOP")],
+        [sg.Button("RETURN")]
+    ]
+
+    # Create the window
+    window = sg.Window("Vending Machine", layout, size=(600, 400))
+
+    # Event loop
+    while True:
+        event, _ = window.read()
+        if event == sg.WIN_CLOSED or machine.process_event(event):
+            break
+
+    window.close()
+
+
     
     
